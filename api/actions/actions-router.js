@@ -13,17 +13,11 @@ router.get("/actions", async (req, res, next) => {
         })
 })
 
-router.get("/actions/:id", validateAction(), async (req, res, next) => {
-    await actions.get(req.params.id)
-        .then((action) => {
-            res.status(200).json(action)
-        })
-        .catch((error) => {
-            next(error)
-        })
+router.get("/actions/:id", validateActionId(), async (req, res, next) => {
+    res.json(req.action)
 })
 
-router.post("/actions", async (req, res, next) => {
+router.post("/actions", validateAction(), async (req, res, next) => {
     await actions.insert(req.body)
         .then((action) => {
             res.status(200).json(action)
