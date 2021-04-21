@@ -14,7 +14,7 @@ router.get("/projects", async (req, res, next) => {
 });
 
 router.get("/projects/:id", validateProjectId(), async (req, res) => {
-    res.json(project)
+    res.json(req.project)
 });
 
 router.post("/projects", validateProject, async (req, res, next) => {
